@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <SharedPointer.h>
+#include <CxxMemory/SharedPointer.h>
 
 namespace cxx_memory
 {

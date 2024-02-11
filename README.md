@@ -11,8 +11,8 @@ that's it, **nothing else**.
 ## Usage
 
 ```cpp
-#include <SharedPointer.h>
-#include <UniquePointer.h>
+#include <CxxMemory/SharedPointer.h>
+#include <CxxMemory/UniquePointer.h>
 
 cxx_memory::SharedPointer<int> mySharedNumber(new int(21));
 cxx_memory::UniquePointer<int> myUniqueNumber(new int(21));

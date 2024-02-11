@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include "UniquePointer.h"
+#include <CxxMemory/UniquePointer.h>
 
 namespace cxx_memory
 {

@@ -1,8 +1,8 @@
 #ifndef CXX_MEMORY_SHARED_POINTER_H
 #define CXX_MEMORY_SHARED_POINTER_H
 
-#include "DefaultDelete.h"
-#include "RefCountedPointer.h"
+#include <CxxMemory/DefaultDelete.h>
+#include <CxxMemory/RefCountedPointer.h>
 
 namespace cxx_memory
 {
