@@ -43,7 +43,7 @@ namespace cxx_memory
     }
 
     template<typename PointerType, class Deleter>
-    inline int SharedPointer<PointerType, Deleter>::GetUseCount() const
+    inline int SharedPointer<PointerType, Deleter>::GetReferenceCount() const
     {
         return m_Pointer->GetReferenceCount();
     }

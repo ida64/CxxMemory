@@ -81,11 +81,11 @@ namespace cxx_memory
         inline void Swap(SharedPointer& other);
 
         /*
-        * @brief GetUseCount returns the use count of the pointer.
+        * @brief GetReferenceCount returns the use count of the pointer.
         * 
-        * @return The use count.
+        * @return The reference count.
          */
-        inline int GetUseCount() const;
+        inline int GetReferenceCount() const;
 
     public: // Operators
         SharedPointer& operator=(const SharedPointer& other)

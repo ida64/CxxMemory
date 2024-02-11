@@ -11,10 +11,13 @@ namespace cxx_memory
         SharedPointer<int> p1(new int(1));
         SharedPointer<int> p2(p1);
         SharedPointer<int> p3(new int(2));
+        
         p3 = p2;
-        EXPECT_EQ(p1.GetUseCount(), 3);
-        EXPECT_EQ(p2.GetUseCount(), 3);
-        EXPECT_EQ(p3.GetUseCount(), 3);
+
+        EXPECT_EQ(p1.GetReferenceCount(), 3);
+        EXPECT_EQ(p2.GetReferenceCount(), 3);
+        EXPECT_EQ(p3.GetReferenceCount(), 3);
+        
         EXPECT_EQ(*p1, 1);
         EXPECT_EQ(*p2, 1);
         EXPECT_EQ(*p3, 1);
