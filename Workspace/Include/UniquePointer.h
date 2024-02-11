@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CXX_MEMORY_UNIQUE_POINTER_H
+#define CXX_MEMORY_UNIQUE_POINTER_H
 
 #include "DefaultDelete.h"
 
@@ -18,31 +19,18 @@ namespace cxx_memory
         * @brief UniquePointer is the constructor that takes a pointer and stores it.
         * @param pointer is the pointer to be stored.
          */
-        UniquePointer(PointerType* pointer)
-            : m_PointerValue(pointer)
-        {
-        }
+        inline UniquePointer(PointerType* pointer);
 
         /*
         * @brief UniquePointer is the move constructor that moves the pointer from another UniquePointer.
         * @param other is the UniquePointer to move from.
          */
-        UniquePointer(UniquePointer&& other) noexcept
-            : m_PointerValue(other.m_PointerValue)
-        {
-            other.m_PointerValue = nullptr;
-        }
+        inline UniquePointer(UniquePointer&& other) noexcept;
 
         /*
         * @brief ~UniquePointer is the destructor that deletes the pointer.
          */
-        ~UniquePointer()
-        {
-            if (m_PointerValue != nullptr)
-            {
-                Deleter()(m_PointerValue);
-            }
-        }
+        inline ~UniquePointer();
 
     public: // Operators
         /*
@@ -79,3 +67,7 @@ namespace cxx_memory
     }; // class UniquePointer
 
 }; // namespace cxx_memory
+
+#include "UniquePointer.inl"
+
+#endif // CXX_MEMORY_UNIQUE_POINTER_H
