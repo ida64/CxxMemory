@@ -4,23 +4,23 @@ namespace cxx_memory
 {
 	template<typename PointerType, class Deleter>
 	inline cxx_memory::UniquePointer<PointerType, Deleter>::UniquePointer(PointerType* pointer)
-		: m_PointerValue(pointer)
+		: pointer_value(pointer)
 	{
 	}
 
 	template<typename PointerType, class Deleter>
 	inline UniquePointer<PointerType, Deleter>::UniquePointer(UniquePointer&& other) noexcept
-		: m_PointerValue(other.m_PointerValue)
+		: pointer_value(other.pointer_value)
 	{
-		other.m_PointerValue = nullptr;
+		other.pointer_value = nullptr;
 	}
 
 	template<typename PointerType, class Deleter>
 	inline UniquePointer<PointerType, Deleter>::~UniquePointer()
 	{
-		if(m_PointerValue != nullptr)
+		if(pointer_value != nullptr)
 		{
-			Deleter()(m_PointerValue);
+			Deleter()(pointer_value);
 		}
 	}
 

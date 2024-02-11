@@ -43,26 +43,20 @@ namespace cxx_memory
         {
             if(this != &other)
             {
-                if(m_PointerValue != nullptr)
+                if(this->pointer_value != nullptr)
                 {
-                    Deleter()(m_PointerValue);
+                    Deleter()(pointer_value);
                 }
 
-                m_PointerValue = other.m_PointerValue;
-                other.m_PointerValue = nullptr;
+                this->pointer_value = other.pointer_value;
+                other.pointer_value = nullptr;
             }
 
             return *this;
         }
 
-    public: // Public Member Functions
-        PointerType* GetValue() const
-        {
-            return m_PointerValue;
-        }
-
-    private: // Private Member Variables
-        PointerType* m_PointerValue;
+    public: // Public Member Variables
+        PointerType* pointer_value;
 
     }; // class UniquePointer
 

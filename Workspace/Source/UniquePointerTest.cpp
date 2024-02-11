@@ -10,12 +10,12 @@ namespace cxx_memory
     {
         UniquePointer<int> uniquePointer(new int(10));
 
-        EXPECT_EQ(*uniquePointer.GetValue(), 10);
+        EXPECT_EQ(*uniquePointer.pointer_value, 10);
 
         UniquePointer<int> uniquePointer2 = std::move(uniquePointer);
-        EXPECT_EQ(*uniquePointer2.GetValue(), 10);
+        EXPECT_EQ(*uniquePointer2.pointer_value, 10);
 
-        EXPECT_EQ(uniquePointer.GetValue(), nullptr);
+        EXPECT_EQ(uniquePointer.pointer_value, nullptr);
     }
 
 } // namespace cxx_memory
