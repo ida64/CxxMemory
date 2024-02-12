@@ -56,12 +56,6 @@ namespace cxx_memory
         inline ~UniquePointer();
 
     public: // Operators
-        /*
-        * @brief operator= is the move assignment operator that moves the pointer from another UniquePointer.
-        * 
-        * @param other is the UniquePointer to move from.
-        * @return UniquePointer& is the reference to this UniquePointer.
-         */
         UniquePointer& operator=(UniquePointer&& other) noexcept
         {
             if(this != &other)
@@ -78,10 +72,23 @@ namespace cxx_memory
             return *this;
         }
 
+        PointerType* operator->() const
+        {
+            return pointer_value;
+        }
+
+        PointerType& operator*() const
+        {
+            return *pointer_value;
+        }
+
     public: // Public Member Variables
         PointerType* pointer_value;
 
     }; // class UniquePointer
+
+    template<class PointerType, class... Arguments>
+    inline UniquePointer<PointerType> MakeUniquePointer(Arguments&&... arguments);
 
 }; // namespace cxx_memory
 

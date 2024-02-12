@@ -24,4 +24,10 @@ namespace cxx_memory
 		}
 	}
 
+	template<class PointerType, class ...Arguments>
+	UniquePointer<PointerType> MakeUniquePointer(Arguments && ...arguments)
+	{
+		return UniquePointer<PointerType>(new PointerType(std::forward<Arguments>(arguments)...));
+	}
+
 } // namespace cxx_memory

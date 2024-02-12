@@ -45,6 +45,13 @@ namespace cxx_memory
             ++this->reference_count;
         }
 
+        RefCountedPointer(const RefCountedPointer&& other) noexcept
+            : raw_pointer(other.raw_pointer)
+            , reference_count(other.reference_count)
+        {
+            ++this->reference_count;
+        }
+
         ~RefCountedPointer()
         {
             if(--reference_count == 0)
@@ -65,8 +72,6 @@ namespace cxx_memory
             {
                 delete this->raw_pointer;
             }
-
-            this->raw_pointer = nullptr;
         }
 
         int GetReferenceCount() const

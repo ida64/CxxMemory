@@ -18,6 +18,19 @@ namespace cxx_memory
         EXPECT_EQ(uniquePointer.pointer_value, nullptr);
     }
 
+    TEST(cxx_memory, MakeUniquePointer)
+    {
+        struct Foo
+        {
+            Foo(int value) : value(value) {}
+            int value;
+
+        }; // struct Foo
+
+        auto uniquePointer = MakeUniquePointer<Foo>(10);
+        EXPECT_EQ(uniquePointer->value, 10);
+    }
+
 } // namespace cxx_memory
 
 #endif // CXX_MEMORY_UNIT_TEST

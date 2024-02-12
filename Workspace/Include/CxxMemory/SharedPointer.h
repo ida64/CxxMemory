@@ -27,11 +27,13 @@
 #include <CxxMemory/DefaultDelete.h>
 #include <CxxMemory/RefCountedPointer.h>
 
+#include <forward_list>
+
 namespace cxx_memory
 {
     /*
     * @brief SharedPointer is a class that has shared ownership of a pointer.
-    * 
+    *
     * @tparam PointerType The type of the pointer.
     * @tparam Deleter The type of the deleter.
     */
@@ -41,21 +43,28 @@ namespace cxx_memory
     public: // Constructors and Destructor
         /*
         * @brief SharedPointer is the default constructor.
-        * 
+        *
         * @param pointer The pointer to be managed.
          */
         inline SharedPointer(PointerType* pointer = nullptr);
 
         /*
         * @brief SharedPointer is the copy constructor.
-        * 
+        *
         * @param other The other SharedPointer to copy from.
          */
         inline SharedPointer(const SharedPointer& other);
 
         /*
-        * @brief SharedPointer is the destructor.
+        * @brief SharedPointer is the move constructor.
         * 
+        * @param other The other SharedPointer to move from.
+         */
+        inline SharedPointer(SharedPointer&& other);
+
+        /*
+        * @brief SharedPointer is the destructor.
+        *
         * The destructor will release the pointer.
          */
         inline ~SharedPointer();
@@ -63,7 +72,7 @@ namespace cxx_memory
     public: // Public Member Functions
         /*
         * @brief Get returns the pointer.
-        * 
+        *
         * @return The raw_pointer.
          */
         inline PointerType* GetRawPointer() const;
@@ -75,21 +84,21 @@ namespace cxx_memory
 
         /*
         * @brief Swap swaps the current pointer with the other pointer.
-        * 
+        *
         * @param other The other SharedPointer to swap with.
          */
         inline void Swap(SharedPointer& other);
 
         /*
         * @brief GetReferenceCount returns the use count of the pointer.
-        * 
+        *
         * @return The reference count.
          */
         inline int GetReferenceCount() const;
 
     public: // Operators
         SharedPointer& operator=(const SharedPointer& other)
-        {
+        {   
             if(this != &other)
             {
                 m_Pointer->Release();
@@ -114,6 +123,9 @@ namespace cxx_memory
         RefCountedPointer* m_Pointer;
 
     }; // class SharedPointer
+
+    template<class PointerType, class... Arguments>
+    inline SharedPointer<PointerType> MakeSharedPointer(Arguments&&... arguments);
 
 }; // namespace cxx_memory
 

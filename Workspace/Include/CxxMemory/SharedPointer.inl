@@ -16,9 +16,21 @@ namespace cxx_memory
     }
 
     template<typename PointerType, class Deleter>
+    inline SharedPointer<PointerType, Deleter>::SharedPointer(SharedPointer&& other)
+    {
+        m_Pointer = other.m_Pointer;
+        other.m_Pointer = nullptr;
+    }
+
+    template<typename PointerType, class Deleter>
     inline SharedPointer<PointerType, Deleter>::~SharedPointer()
     {
         m_Pointer->Release();
+        
+        if(m_Pointer->GetReferenceCount() == 0)
+        {
+            delete m_Pointer;
+        }
     }
 
     template<typename PointerType, class Deleter>
@@ -46,6 +58,13 @@ namespace cxx_memory
     inline int SharedPointer<PointerType, Deleter>::GetReferenceCount() const
     {
         return m_Pointer->GetReferenceCount();
+    }
+
+    template<class PointerType, class ...Arguments>
+    SharedPointer<PointerType> MakeSharedPointer(Arguments && ...arguments)
+    {
+        PointerType* raw = new PointerType(std::forward<Arguments>(arguments)...);
+        return SharedPointer<PointerType>(new PointerType(std::forward<Arguments>(arguments)...));
     }
 
 } // namespace cxx_memory

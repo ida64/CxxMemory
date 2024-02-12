@@ -23,6 +23,21 @@ namespace cxx_memory
         EXPECT_EQ(*p3, 1);
     }
 
+    TEST(cxx_memory, MakeSharedPointer)
+    {
+        struct Foo
+        {
+            Foo(int value) : value(value) {}
+            int value;
+
+        }; // struct Foo
+
+        auto p = MakeSharedPointer<Foo>(1);
+
+        EXPECT_EQ(p.GetReferenceCount(), 1);
+        EXPECT_EQ(p->value, 1);
+    }
+
 } // namespace cxx_memory
 
 #endif // CXX_MEMORY_UNIT_TEST
